@@ -54,6 +54,8 @@ slug: "markdown-blog"
 
 > 파이프라인의 각 단계를 플러그인으로 교체할 수 있다는 점이 가장 큰 장점입니다.
 
+Markdown은 AI에 작업 맥락과 참고 자료를 구조적으로 전달할 때도 유용합니다. 요청을 구체화하는 방법은 [프롬프트 엔지니어링 실전 가이드](/posts/prompt-engineering)에서 확인할 수 있습니다.
+
 ## 마치며
 
 이제 새 글을 쓰고 싶다면 파일 하나만 추가하면 됩니다. 다음 글에서는 [frontmatter를 설계하는 방법](/posts/frontmatter-guide)을 자세히 다룹니다.
