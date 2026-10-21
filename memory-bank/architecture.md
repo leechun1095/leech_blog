@@ -58,13 +58,17 @@ memory-bank/             프로젝트 컨텍스트 및 아키텍처 문서
 - `pnpm build`: 프로덕션 빌드
 - `pnpm start`: 빌드된 앱 실행
 
-`@/*` 별칭은 저장소 루트 기준으로 설정되어 있습니다. `next.config.mjs`에서 이미지 최적화를 비활성화했고 TypeScript 빌드 오류를 무시하도록 설정되어 있습니다.
+`@/*` 별칭은 저장소 루트 기준으로 설정되어 있습니다. `next.config.mjs`에서 이미지 최적화를 비활성화했고 TypeScript 빌드 오류를 무시하도록 설정되어 있습니다. Vercel은 기본 Next.js 설정으로 동작하며, Pages 전용 정적 export 옵션은 `GITHUB_PAGES=true`일 때만 적용됩니다.
 
 ## GitHub Pages 배포
 
 `.github/workflows/deploy.yml`은 `main` 브랜치 푸시 또는 수동 실행 시 정적 사이트를 빌드해 GitHub Pages로 배포합니다. 빌드에는 `GITHUB_PAGES=true`를 전달하며, Next.js는 `output: 'export'`와 `/leech_blog` base path로 `out/`을 생성합니다. `trailingSlash` 설정으로 게시물별 `index.html`을 만들고, `public/.nojekyll`이 Next.js의 `_next/` 자산 폴더를 Pages에서 제공할 수 있게 합니다.
 
 Next.js 컴포넌트 링크와 정적 파일 경로는 저장소 하위 경로를 고려합니다. `lib/posts.ts`도 Markdown 본문에 적힌 `/posts/...` 내부 링크에 같은 prefix를 붙입니다. GitHub Pages 사용 전 저장소 설정의 **Pages → Build and deployment → Source**를 **GitHub Actions**로 지정해야 합니다. 사이트 주소는 `https://leechun1095.github.io/leech_blog/`입니다.
+
+## Vercel 배포
+
+Vercel Git 연동은 Next.js 프레임워크와 `package.json`의 `packageManager` 및 `build` 스크립트를 사용합니다. Vercel 빌드에는 `GITHUB_PAGES` 환경 변수를 설정하지 않아야 Pages 전용 `output`, `basePath`, `trailingSlash`가 적용되지 않습니다. 배포하려면 GitHub 저장소를 Vercel 프로젝트에 연결하고 프로젝트 설정의 Production Branch를 `vercel`로 지정합니다. `vercel` 브랜치 푸시는 Production 배포가 되고 다른 브랜치는 Preview 배포로 동작합니다.
 
 ## 콘텐츠 추가
 

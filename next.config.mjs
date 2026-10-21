@@ -2,9 +2,13 @@
 const isGitHubPages = process.env.GITHUB_PAGES === 'true'
 
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
-  basePath: isGitHubPages ? '/leech_blog' : undefined,
+  ...(isGitHubPages
+    ? {
+        output: 'export',
+        trailingSlash: true,
+        basePath: '/leech_blog',
+      }
+    : {}),
   typescript: {
     ignoreBuildErrors: true,
   },
