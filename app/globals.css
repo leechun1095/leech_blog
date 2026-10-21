@@ -1,0 +1,214 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-sans-kr), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif-kr), ui-serif, Georgia, serif;
+  --font-mono: var(--font-mono-code), ui-monospace, SFMono-Regular, monospace;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  color-scheme: light;
+  --background: oklch(0.982 0.006 85);
+  --foreground: oklch(0.24 0.01 70);
+  --card: oklch(0.995 0.003 85);
+  --card-foreground: oklch(0.24 0.01 70);
+  --popover: oklch(0.995 0.003 85);
+  --popover-foreground: oklch(0.24 0.01 70);
+  --primary: oklch(0.45 0.08 160);
+  --primary-foreground: oklch(0.985 0.005 85);
+  --secondary: oklch(0.94 0.012 85);
+  --secondary-foreground: oklch(0.34 0.02 70);
+  --muted: oklch(0.95 0.008 85);
+  --muted-foreground: oklch(0.5 0.012 70);
+  --accent: oklch(0.94 0.012 85);
+  --accent-foreground: oklch(0.24 0.01 70);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0.01 80);
+  --input: oklch(0.88 0.01 80);
+  --ring: oklch(0.45 0.08 160);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    word-break: keep-all;
+  }
+  [id] {
+    scroll-margin-top: 2rem;
+  }
+}
+
+@layer components {
+  .prose-blog {
+    max-width: 68ch;
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    color: var(--foreground);
+  }
+  .prose-blog > * + * {
+    margin-top: 1.25em;
+  }
+  .prose-blog h2 {
+    margin-top: 2.4em;
+    margin-bottom: 0.2em;
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .prose-blog h3 {
+    margin-top: 1.9em;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .prose-blog h2 + *,
+  .prose-blog h3 + * {
+    margin-top: 0.75em;
+  }
+  .prose-blog a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in oklch, var(--primary) 40%, transparent);
+  }
+  .prose-blog a:hover {
+    text-decoration-color: var(--primary);
+  }
+  .prose-blog strong {
+    font-weight: 700;
+  }
+  .prose-blog ul,
+  .prose-blog ol {
+    padding-left: 1.4em;
+  }
+  .prose-blog ul {
+    list-style: disc;
+  }
+  .prose-blog ol {
+    list-style: decimal;
+  }
+  .prose-blog li + li {
+    margin-top: 0.4em;
+  }
+  .prose-blog li::marker {
+    color: var(--muted-foreground);
+  }
+  .prose-blog ul.contains-task-list {
+    list-style: none;
+    padding-left: 0.2em;
+  }
+  .prose-blog .task-list-item input {
+    margin-right: 0.5em;
+    accent-color: var(--primary);
+  }
+  .prose-blog blockquote {
+    border-left: 3px solid var(--primary);
+    padding: 0.25em 0 0.25em 1.1em;
+    color: var(--muted-foreground);
+    font-style: italic;
+  }
+  .prose-blog :not(pre) > code {
+    border-radius: 0.3rem;
+    background: var(--secondary);
+    padding: 0.15em 0.4em;
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+  }
+  .prose-blog pre {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    background: oklch(0.24 0.012 70);
+    color: oklch(0.93 0.01 85);
+    padding: 1.1em 1.25em;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  .prose-blog pre code {
+    font-family: inherit;
+  }
+  .prose-blog table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+  }
+  .prose-blog th,
+  .prose-blog td {
+    border-bottom: 1px solid var(--border);
+    padding: 0.6em 0.9em;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .prose-blog th {
+    font-weight: 600;
+    border-bottom-width: 2px;
+  }
+  .prose-blog hr {
+    margin: 2.5em 0;
+    border-color: var(--border);
+  }
+  .prose-blog img {
+    border-radius: var(--radius);
+  }
+
+  .prose-blog .hljs-comment,
+  .prose-blog .hljs-quote {
+    color: oklch(0.65 0.01 80);
+    font-style: italic;
+  }
+  .prose-blog .hljs-keyword,
+  .prose-blog .hljs-selector-tag,
+  .prose-blog .hljs-attr,
+  .prose-blog .hljs-meta {
+    color: oklch(0.78 0.1 160);
+  }
+  .prose-blog .hljs-string,
+  .prose-blog .hljs-number,
+  .prose-blog .hljs-literal {
+    color: oklch(0.82 0.1 80);
+  }
+  .prose-blog .hljs-title,
+  .prose-blog .hljs-selector-class,
+  .prose-blog .hljs-property,
+  .prose-blog .hljs-section {
+    color: oklch(0.8 0.08 230);
+  }
+}
