@@ -10,6 +10,7 @@ import remarkRehype from 'remark-rehype'
 import rehypeSlug from 'rehype-slug'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeStringify from 'rehype-stringify'
+import { SITE_BASE_PATH } from '@/lib/site'
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts')
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -136,6 +137,9 @@ function extractToc(markdown: string): TocItem[] {
 }
 
 async function renderMarkdown(markdown: string): Promise<string> {
+  const content = SITE_BASE_PATH
+    ? markdown.replace(/\]\(\/posts\//g, `](${SITE_BASE_PATH}/posts/`)
+    : markdown
   const file = await unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -143,7 +147,7 @@ async function renderMarkdown(markdown: string): Promise<string> {
     .use(rehypeSlug)
     .use(rehypeHighlight, { detect: false })
     .use(rehypeStringify)
-    .process(markdown)
+    .process(content)
   return String(file)
 }
 

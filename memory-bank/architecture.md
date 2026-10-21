@@ -60,6 +60,12 @@ memory-bank/             프로젝트 컨텍스트 및 아키텍처 문서
 
 `@/*` 별칭은 저장소 루트 기준으로 설정되어 있습니다. `next.config.mjs`에서 이미지 최적화를 비활성화했고 TypeScript 빌드 오류를 무시하도록 설정되어 있습니다.
 
+## GitHub Pages 배포
+
+`.github/workflows/deploy.yml`은 `main` 브랜치 푸시 또는 수동 실행 시 정적 사이트를 빌드해 GitHub Pages로 배포합니다. 빌드에는 `GITHUB_PAGES=true`를 전달하며, Next.js는 `output: 'export'`와 `/leech_blog` base path로 `out/`을 생성합니다. `trailingSlash` 설정으로 게시물별 `index.html`을 만들고, `public/.nojekyll`이 Next.js의 `_next/` 자산 폴더를 Pages에서 제공할 수 있게 합니다.
+
+Next.js 컴포넌트 링크와 정적 파일 경로는 저장소 하위 경로를 고려합니다. `lib/posts.ts`도 Markdown 본문에 적힌 `/posts/...` 내부 링크에 같은 prefix를 붙입니다. GitHub Pages 사용 전 저장소 설정의 **Pages → Build and deployment → Source**를 **GitHub Actions**로 지정해야 합니다. 사이트 주소는 `https://leechun1095.github.io/leech_blog/`입니다.
+
 ## 콘텐츠 추가
 
 새 게시물은 `content/posts/<slug>.md`에 추가합니다. 파일에는 YAML Frontmatter와 Markdown 본문을 작성합니다. 등록된 slug를 Next.js가 정적 게시물 경로 생성에 사용하므로 게시물 추가 후 개발 서버를 다시 시작하거나 새 빌드를 생성해야 콘텐츠가 경로에 포함됩니다.

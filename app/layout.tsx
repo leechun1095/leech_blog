@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Noto_Sans_KR, Noto_Serif_KR, JetBrains_Mono } from 'next/font/google'
 import { SiteFooter, SiteHeader } from '@/components/site-header'
+import { SITE_BASE_PATH } from '@/lib/site'
 import './globals.css'
 
 const sans = Noto_Sans_KR({ subsets: ['latin'], variable: '--font-sans-kr', display: 'swap' })
@@ -22,11 +23,11 @@ export const metadata: Metadata = {
   generator: 'v0.app',
   icons: {
     icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: `${SITE_BASE_PATH}/icon-light-32x32.png`, media: '(prefers-color-scheme: light)' },
+      { url: `${SITE_BASE_PATH}/icon-dark-32x32.png`, media: '(prefers-color-scheme: dark)' },
+      { url: `${SITE_BASE_PATH}/icon.svg`, type: 'image/svg+xml' },
     ],
-    apple: '/apple-icon.png',
+    apple: `${SITE_BASE_PATH}/apple-icon.png`,
   },
 }
 
@@ -46,7 +47,7 @@ export default function RootLayout({
         <SiteHeader />
         <div className="flex-1">{children}</div>
         <SiteFooter />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && process.env.VERCEL && <Analytics />}
       </body>
     </html>
   )
